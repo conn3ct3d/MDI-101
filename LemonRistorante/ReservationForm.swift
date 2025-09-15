@@ -11,15 +11,17 @@ struct ReservationForm: View {
     @State var userFirstName = ""
     @State var guestCount = 1
     
-    // A computed property to generate the reservation status text
+    
     var reservationStatus: String {
-        if !userFirstName.isEmpty && guestCount > 0 {
-            return "\(userFirstName)'s reservation for \(guestCount) people"
+        if !userFirstName.isEmpty && guestCount > 1 {
+            return "\(userFirstName)'s reservation for \(guestCount)"
         } else if !userFirstName.isEmpty {
             return "\(userFirstName)'s reservation"
-        } else if guestCount > 0 {
-            return "Reservation for \(guestCount) people"
-        } else {
+        } else if guestCount > 1 {
+            return "Reservation for \(guestCount)"
+        } else if guestCount == 1 && !userFirstName.isEmpty{
+            return "Reservation for \(userFirstName)"
+        }else {
             return ""
         }
     }
