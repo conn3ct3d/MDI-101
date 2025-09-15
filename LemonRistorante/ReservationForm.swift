@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ReservationForm: View {
     @State var userFirstName = ""
-    @State var guestCount = 0
+    @State var guestCount = 1
     
     // A computed property to generate the reservation status text
     var reservationStatus: String {
