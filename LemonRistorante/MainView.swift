@@ -15,13 +15,20 @@ struct MainView: View {
     var body: some View {
         NavigationView{
             if isLoggedIn == true {
-                Text("Welcome Mr.\(userLastName)")
-                    .font(.title)
-                
-                NavigationLink("About Us", destination:AboutView())
+                VStack{
+                    Text("Welcome Mr. \(userLastName)")
+                        .font(.title)
+                    
+                    NavigationLink("About Us", destination:AboutView())
+                    Button("Logout"){
+                        print("You have logged out.")
+                        isLoggedIn = false
+                        userName = ""
+                    }
+                }
             }
             else {
-                Text("You are not logged in")
+                LoginView(isLoggedIn: $isLoggedIn, userName: $userName)
             }
         }
     }
