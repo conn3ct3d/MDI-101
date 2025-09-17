@@ -18,6 +18,7 @@ struct ReservationForm: View {
     @State private var reservationDate = Date()
     @State private var dateIsValid:Bool = false
     
+    
     // computed properties
     private var reservationStatus: String {
         if !userFirstName.isEmpty {
@@ -55,8 +56,13 @@ struct ReservationForm: View {
                         }
                         
                         Stepper("Number of Guests: \(guestCount)", value: $guestCount, in: 1 ... 10)
-                        if guestCount > 5 {
-                            Text("We will call you to confirm availability")
+                        if guestCount > 5 && guestCount < 8 {
+                            Text("Large parties must arrive 10 minutes early.")
+                                .foregroundColor(.orange)
+                                .font(.caption)
+                        }
+                        if guestCount >= 8 {
+                            Text("For parties larger than 8, we will call to confirm")
                                 .foregroundColor(.orange)
                                 .font(.caption)
                         }
@@ -85,7 +91,8 @@ struct ReservationForm: View {
                     }
                 }
                 .navigationDestination(isPresented: $showSummary) {
-                    ReservationSummaryView(name: $userFirstName, guests: $guestCount)
+                    ReservationSummaryView(name: $userFirstName, guests: $guestCount, date: $reservationDate, allergies: $allergyNotes)
+                    // send date, allergies to summaryview
                 }
             }
             .onAppear{
