@@ -9,13 +9,17 @@ import SwiftUI
 
 struct ReservationForm: View {
     
-    @State var userFirstName = ""
-    @State var guestCount = 1
-    @State var allergyNotes = ""
-    @State var showSummary = false
+    // state variables
+    @State private var userFirstName = ""
+    @State private var guestCount = 1
+    @State private var allergyNotes = ""
+    @State private var showSummary = false
     @FocusState private var isNameFieldFocused:Bool
+    @State private var reservationDate = Date()
+    @State private var dateIsValid:Bool = false
     
-    var reservationStatus: String {
+    // computed properties
+    private var reservationStatus: String {
         if !userFirstName.isEmpty {
             if guestCount > 1 {
                 return "\(userFirstName)'s reservation for \(guestCount)"
@@ -25,10 +29,11 @@ struct ReservationForm: View {
         } else if guestCount > 1 {
             return "Reservation for \(guestCount)"
         } else {
-            return ""
+            return "Appoint a Reservation"
         }
     }
     
+    //body
     var body: some View {
         NavigationStack {
             VStack(alignment: .leading) {
@@ -48,6 +53,7 @@ struct ReservationForm: View {
                                 .foregroundColor(.orange)
                                 .font(.caption)
                         }
+                        
                         Stepper("Number of Guests: \(guestCount)", value: $guestCount, in: 1 ... 10)
                         if guestCount > 5 {
                             Text("We will call you to confirm availability")
@@ -55,14 +61,27 @@ struct ReservationForm: View {
                                 .font(.caption)
                         }
                         
+                        DatePicker("Date", selection:$reservationDate, displayedComponents: [.date, .hourAndMinute])
+                        
+                        if dateIsValid {
+                            Text("Date is available")
+                                .foregroundColor(.green)
+                                .font(.caption)
+                        }
+                        else {
+                            Text("Please choose a valid future date")
+                                .font(.caption)
+                                .foregroundColor(.orange)
+                        }
+                        
                         TextField("Allergy Notes", text: $allergyNotes)
                         
                         Button("Confirm reservation") {
-                            if !userFirstName.isEmpty {
+                            if !userFirstName.isEmpty && dateIsValid {
                                 showSummary = true
                             }
                         }
-                        .disabled(userFirstName.isEmpty)
+                        .disabled(userFirstName.isEmpty || !dateIsValid)
                     }
                 }
                 .navigationDestination(isPresented: $showSummary) {
@@ -71,8 +90,20 @@ struct ReservationForm: View {
             }
             .onAppear{
                 self.isNameFieldFocused = true
+                // ensure initial validation state is correct
+                self.dateIsValid = Self.isDateInFuture(reservationDate)
+            }
+            .onChange(of: reservationDate) {
+                newValue in self.dateIsValid = Self.isDateInFuture(newValue)
+            }
+            .onChange(of: userFirstName) {
+                _ in
             }
         }
+    }
+    // helper
+    private static func isDateInFuture(_ date: Date) -> Bool{
+        return date >= Date()
     }
 }
         #Preview {

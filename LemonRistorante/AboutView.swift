@@ -38,10 +38,10 @@ struct AboutView: View {
             Button("Clear my orders"){
                 orderCount = 0
             }
-            TextField("Enter your name: ", text:$clientName)
-                .padding()
-                .textFieldStyle(.roundedBorder)
-            Text ("Client name is working \(clientName)")
+            //TextField("Enter your name: ", text:$clientName)
+              //  .padding()
+                //.textFieldStyle(.roundedBorder)
+            //Text ("Client name is working \(clientName)")
         }
         
         .navigationTitle("About Us")

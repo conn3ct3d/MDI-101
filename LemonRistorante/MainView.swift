@@ -19,7 +19,9 @@ struct MainView: View {
                     Text("Welcome Mr. \(userLastName)")
                         .font(.title)
                     
-                    NavigationLink("About Us", destination:AboutView())
+                    NavigationLink("About Us", destination:ZStack {
+                        AboutView()
+                    })
                     Button("Logout"){
                         print("You have logged out.")
                         isLoggedIn = false
