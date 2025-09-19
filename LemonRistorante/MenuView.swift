@@ -16,6 +16,7 @@ struct MenuView: View {
         "A 'literal' block of cheese":40.00,
         "Spaghetti": 5.99,
         "Taco":4.99,
+        "Chocolate Cake":5.75,
     ]
     
     var body: some View {
@@ -30,9 +31,15 @@ struct MenuView: View {
             .padding()
             
             List{
+                Text("Main course meals")
+                    .font(.headline)
+                    .fontWeight(.bold)
+                    .textCase(.uppercase)
+                    .kerning(2)
+                    
                 ForEach(menuItems.sorted(by: {$0.key < $1.key}), id: \.key){ (name, price) in
                     HStack{
-                        VStack{
+                        VStack(alignment: .leading){
                             Text(name)
                                 .font(.headline)
                             Text("$\(price, specifier: "%.2f")")
@@ -52,7 +59,20 @@ struct MenuView: View {
                             .background(Color.orange.opacity(0.2))
                             .cornerRadius(6)
                         }
+                        if price <= 7 {
+                            HStack{
+                                Image(systemName:"tag.fill")
+                                Text("VALUE")
+                            }
+                            .font(.caption)
+                                    .foregroundColor(.white)
+                                    .padding(6)
+                                    .background(Color.green.opacity(1))
+                                    .cornerRadius(6)
+                            
+                        }
                     }
+                    .padding(.vertical, 8)
                 }
             }
         }
