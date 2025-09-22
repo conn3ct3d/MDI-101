@@ -10,6 +10,7 @@ import SwiftUI
 struct LoginView: View {
     @Binding var isLoggedIn:Bool
     @Binding var userName:String
+    
     var body: some View {
         NavigationStack{
             VStack{
@@ -17,6 +18,7 @@ struct LoginView: View {
                     .resizable()
                     .scaledToFit()
                     .frame(height:200)
+                
                 TextField("Enter your name", text:$userName)
                     .textFieldStyle(.roundedBorder)
                     .padding()
