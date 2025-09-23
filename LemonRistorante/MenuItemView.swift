@@ -15,8 +15,8 @@ struct MenuItemView: View {
             VStack(alignment: .leading){
                 Text(item.name)
                     .font(.headline)
-                
-                Text("# \(item.price, specifier:"%.2f")")
+                Text(item.description).font(.subheadline)
+                Text("$ \(item.price, specifier:"%.2f")")
                     .foregroundColor(Color.secondary)
                 
             }

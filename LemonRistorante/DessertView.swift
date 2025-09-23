@@ -32,7 +32,8 @@ struct DessertView: View {
             List(dessertMenuItems) { dessert in
                 HStack{
                     Text(dessert.name)
-                        .font(.title3)
+                        .font(.headline)
+                    Text(dessert.description).font(.subheadline)
                     Spacer()
                     
                     Text(String(format:"%.2f", dessert.price))
