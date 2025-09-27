@@ -14,8 +14,8 @@ struct MainView: View {
     
     var body: some View {
         NavigationView {
-            // The if/else logic should be inside the NavigationView
-            if isLoggedIn { // You can just use "isLoggedIn" instead of "isLoggedIn == true"
+            
+            if isLoggedIn {
                 VStack {
                     Text("Welcome Mr. \(userLastName)")
                         .font(.title)
@@ -24,24 +24,27 @@ struct MainView: View {
                     NavigationLink("Make a Reservation", destination: ReservationForm())
                         .padding()
                     
+                    NavigationLink("See our Menu", destination: MenuView())
+                        .padding()
+                    
                     NavigationLink("About Us", destination: AboutView())
-                        .padding(.bottom) // Added padding for better spacing
+                        .padding(.bottom)
                     
                     Button("Logout") {
                         print("You have logged out.")
                         isLoggedIn = false
                         userName = ""
-                        // You probably want to clear the last name too
+                        
                         userLastName = ""
                     }
                     .padding()
                     
-                    Spacer() // Pushes content to the top
+                    Spacer()
                 }
-                .navigationTitle("Main Menu") // Good to have a title for the logged-in view
-                .navigationBarBackButtonHidden(true) // Hides the back button
+                .navigationTitle("Main Menu")
+                .navigationBarBackButtonHidden(true)
             } else {
-                // This is shown when the user is not logged in
+                
                 LoginView(isLoggedIn: $isLoggedIn, userName: $userName)
             }
         }
