@@ -8,16 +8,6 @@
 import SwiftUI
 
 struct MenuView: View {
-    // create a dictionary dish:price (6 items)
-//    let menuItems = [
-//        "Steak":19.99,
-//        "Mac and Cheese":7.99,
-//        "Shrimp Cocktail":16.99,
-//        "A 'literal' block of cheese":40.00,
-//        "Spaghetti": 5.99,
-//        "Taco":4.99,
-//        "Chocolate Cake":5.75,
-//    ]
     
     let menuItems = [
         MenuItem(name:"Pizza", description:"Pepperoni", price:14.99),
@@ -27,6 +17,10 @@ struct MenuView: View {
         MenuItem(name:"Cheescake Slice", description: "With strawberry topping", price:6.99)
         
     ]
+
+    // filtering: user must be able to filter and only show premium items.
+    // average price should reflect premium items if filtered
+    
     
     var sortedMenuItems: [MenuItem]{
         menuItems.sorted{$0.price < $1.price}
@@ -60,6 +54,12 @@ struct MenuView: View {
     @State private var showMessage:Bool = false
     @State private var showThankYouMessage:Bool = false
     @State private var showDesserts:Bool = false
+    @State private var showPremium:Bool = false
+    
+    // notes on computed properties
+    // var propertyName: Type{
+//      return a calculated value
+//      }
     
     var body: some View {
         VStack{
@@ -76,7 +76,7 @@ struct MenuView: View {
             Text("Average price: $\(averagePrice, specifier:"%.2f")")
                 .foregroundColor(.gray)
                 .font(.title3)
-            VStack(spacing:30){
+            VStack(spacing:5){
                 Toggle("Show a special text", isOn: $showMessage)
                     .padding()
                 if showMessage{
@@ -110,52 +110,7 @@ struct MenuView: View {
                 .padding()
                 .background(.yellow.opacity(0.2))
                 .cornerRadius(8)
-            
-//            List{
-//                Text("Main course meals")
-//                    .font(.headline)
-//                    .fontWeight(.bold)
-//                    .textCase(.uppercase)
-//                    .kerning(2)
-//                    
-//                ForEach(menuItems.sorted(by: {$0.key < $1.key}), id: \.key){ (name, price) in
-//                    HStack{
-//                        VStack(alignment: .leading){
-//                            Text(name)
-//                                .font(.headline)
-//                            Text("$\(price, specifier: "%.2f")")
-//                                .foregroundColor(.secondary)
-//                        }
-//                        Spacer()
-//                        
-//                        if price > 10{
-//                            HStack{
-//                                Image(systemName:"star")
-//                                    .foregroundColor(.yellow)
-//                                Text("Premium")
-//                                    .font(.caption)
-//                            }
-//                            .foregroundColor(.orange)
-//                            .padding(6)
-//                            .background(Color.orange.opacity(0.2))
-//                            .cornerRadius(6)
-//                        }
-//                        if price <= 7 {
-//                            HStack{
-//                                Image(systemName:"tag.fill")
-//                                Text("VALUE")
-//                            }
-//                            .font(.caption)
-//                                    .foregroundColor(.white)
-//                                    .padding(6)
-//                                    .background(Color.green.opacity(1))
-//                                    .cornerRadius(6)
-//                            
-//                        }
-//                    }
-//                    .padding(.vertical, 8)
-//                }
-//            }
+
         }
     }
 }
