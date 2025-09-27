@@ -11,18 +11,21 @@ struct DessertView: View {
     let dessertMenuItems = [
             DessertItem(
                 name:"Cheescake Slice",
-                description:"Some description",
-                price:4.99
+                description:"Rich and Creamy Cheesecake",
+                price:4.99,
+                imageName: "birthday.cake.fill"
             ),
             DessertItem(
                 name:"Churro",
-                description:"Some description",
-                price:2.99
+                description:"Fried dough with cinnamon sugar",
+                price:2.99,
+                imageName: "birthday.cake.fill"
             ),
             DessertItem(
                 name:"Napolitano Icecream Bowl",
-                description:"Some description",
-                price:5.99
+                description:"A classic trio of flavors",
+                price:5.99,
+                imageName:"birthday.cake.fill"
             ),
     ]
     
@@ -30,18 +33,34 @@ struct DessertView: View {
     var body: some View {
         NavigationView{
             List(dessertMenuItems) { dessert in
-                HStack{
+                HStack(spacing:16){
+                    Image(systemName:dessert.imageName)
+                        .font(.title)
+                        .frame(width:50, height:50)
+                        .background(Color.gray.opacity(0.1))
+                        .clipShape(RoundedRectangle(cornerRadius:10))
+                    
+                    VStack(alignment:.leading,spacing:5){
                     Text(dessert.name)
                         .font(.headline)
-                    Text(dessert.description).font(.subheadline)
+                        .fontWeight(.bold)
+                    Text(dessert.description)
+                        .font(.subheadline)
+                        .foregroundColor(.secondary)
+                    
+                    }
+                    
                     Spacer()
                     
                     Text(String(format:"%.2f", dessert.price))
-                        .foregroundColor(.gray)
+                        .fontWeight(.semibold)
+                        .foregroundColor(.primary)
                 }
                 .padding(.vertical, 5)
             }
+            .listStyle(.plain)
             .navigationTitle("Desserts")
+            .navigationBarTitleDisplayMode(.inline)
         }
     }
 }

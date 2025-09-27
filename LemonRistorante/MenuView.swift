@@ -10,12 +10,10 @@ import SwiftUI
 struct MenuView: View {
     
     let menuItems = [
-        MenuItem(name:"Pizza", description:"Pepperoni", price:14.99),
-        MenuItem(name:"Lasagna", description:"Spicy carbonara", price:25.99),
-        MenuItem(name:"Alfredo Chicken", description:"Extra creamy sauce", price:17.99),
-        MenuItem(name:"Chicken Taco", description:"Hard taco with tasty chicken filling", price:4.99),
-        MenuItem(name:"Cheescake Slice", description: "With strawberry topping", price:6.99)
-        
+        MenuItem(name:"Gourmet Burger", description:"Angus beef, cheddar, and our special sauce.", price:14.99, imageName:"hamburger.fill"),
+        MenuItem(name:"Crispy Fries", description:"A perfect side for any dish", price:4.50, imageName:"frenchfries.fill"),
+        MenuItem(name:"Garden Salad", description:"Fresh greens and a light vinaigrette.", price:17.99, imageName:"leaf.fill"),
+        MenuItem(name:"Ribeye Steak", description:"H12oz cut served with mashed potatoes.", price:4.99, imageName:"steak.fill"),
     ]
 
     // filtering: user must be able to filter and only show premium items.
@@ -110,7 +108,6 @@ struct MenuView: View {
                 .padding()
                 .background(.yellow.opacity(0.2))
                 .cornerRadius(8)
-
         }
     }
 }

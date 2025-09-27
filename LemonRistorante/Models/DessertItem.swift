@@ -12,4 +12,5 @@ struct DessertItem: Identifiable {
     var name: String
     var description: String
     var price: Double
+    let imageName: String
 }
