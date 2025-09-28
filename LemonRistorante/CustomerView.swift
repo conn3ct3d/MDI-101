@@ -24,12 +24,14 @@ struct CustomerView: View {
         showPremium ? customers.filter(\.isPremium) : customers
     }
     
+    
     var body: some View {
         NavigationView {
-
+            
             VStack {
                 Toggle("Show premium customers only", isOn:$showPremium)
                     .padding()
+                Text("Customers are tappable")
                 
                 List(customersOnDisplay) {
                     customer in
