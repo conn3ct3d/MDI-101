@@ -11,4 +11,5 @@ struct Customer:Identifiable{
     let id = UUID()
     var name:String
     var isPremium:Bool
+    var email:String
 }

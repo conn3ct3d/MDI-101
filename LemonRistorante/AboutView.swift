@@ -8,46 +8,60 @@ struct AboutView: View {
     let userFirstName = "Michael"
     let userLastName = "Myers"
     @State var orderCount = 10
-    @State var clientName:String = ""
     
     var body: some View {
-        VStack {
-            Text("Hello \(userFirstName),")
-                .font(.title)
-                .fontWeight(.bold)
-                .lineLimit(1)
-                .padding()
+        ZStack {
+            Color(.systemGray6)
+                .ignoresSafeArea()
             
-            Text("Welcome to Little Lemon")
-                .font(.body)
-            
-            Image("littleLemonLogo")
-                .resizable()
-                .scaledToFit()
-                .frame(width: 275, height: 170)
-            
-            Text("You have ordered \(orderCount) times.")
-                .padding(.top, 20)
-            
-            Button("Place a new order") {
-                orderCount += 1
+            VStack(spacing: 20) {
+                Spacer()
+                
+                Text("About Little Lemon")
+                    .font(.largeTitle)
+                    .fontWeight(.light)
+                
+                Text("Your favorite neighborhood restaurant.")
+                    .font(.headline)
+                    .foregroundColor(.secondary)
+                
+                Image("littleLemonLogo")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 200, height: 150)
+                    .clipShape(RoundedRectangle(cornerRadius: 16))
+                    .shadow(color: .black.opacity(0.1), radius: 8, x: 0, y: 4)
+                    .padding(.bottom)
+                
+                Text("You have ordered \(orderCount) times.")
+                    .font(.subheadline)
+                    .foregroundColor(.secondary)
+                
+                Spacer()
+                
+                Button("Place a new order") {
+                    orderCount += 1
+                }
+                .buttonStyle(PrimaryButtonStyle())
+                
+                Button("Clear my history"){
+                    orderCount = 0
+                }
+                .buttonStyle(DestructiveButtonStyle())
+                
+                Spacer()
+                    .frame(height: 10)
             }
-            .padding()
-            .buttonStyle(.borderedProminent)
-            
-            Button("Clear my orders"){
-                orderCount = 0
-            }
-            //TextField("Enter your name: ", text:$clientName)
-              //  .padding()
-                //.textFieldStyle(.roundedBorder)
-            //Text ("Client name is working \(clientName)")
+            .padding(.horizontal)
+            .navigationTitle("About Us")
+            .navigationBarTitleDisplayMode(.inline)
         }
-        
-        .navigationTitle("About Us")
+        .tint(.green) 
     }
 }
 
 #Preview {
-    AboutView()
+    NavigationView {
+        AboutView()
+    }
 }
