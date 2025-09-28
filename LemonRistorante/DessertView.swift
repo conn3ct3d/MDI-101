@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct DessertView: View {
+    @Environment(\.dismiss) var dismiss
     let dessertMenuItems = [
             DessertItem(
                 name:"Cheescake Slice",

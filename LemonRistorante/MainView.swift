@@ -12,8 +12,6 @@ struct MainView: View {
     @State private var userName = "Michael"
     @State private var userLastName = "Myers"
     
-    
-    
     var body: some View {
         NavigationView {
             
@@ -40,6 +38,9 @@ struct MainView: View {
                         NavigationLink("About Us", destination: AboutView())
                             .buttonStyle(PrimaryButtonStyle())
                         
+                        NavigationLink("Our Customers", destination: CustomerView())
+                            .buttonStyle(PrimaryButtonStyle())
+                        
                         Spacer()
                         
                         Button("Logout") {
@@ -52,7 +53,7 @@ struct MainView: View {
                         .padding(.bottom)
                     }
                     .padding(.horizontal) // horizontal padding
-                    .navigationTitle("Main Menu")
+                    .navigationTitle("Home")
                     .navigationBarTitleDisplayMode(.inline)
                     .navigationBarBackButtonHidden(true)
                 }
@@ -81,7 +82,7 @@ struct PrimaryButtonStyle: ButtonStyle {
     }
 }
 
-/// distinct styling for destructive actions such as loging out
+/// distinct styling for destructive actions such as logging out
 struct DestructiveButtonStyle: ButtonStyle {
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
